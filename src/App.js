@@ -12,6 +12,10 @@ function App() {
       <NavBar />
       <main>
         <Switch>
+          {/* to pass props **newer** */}
+          {/* <Route path={"/example"} >
+            <Home />
+          </Route> */}
           <Route exact path={"/"} component={Home} />
           <Route path={"/berries"} component={Berries} />
           <Route path={"/locations"} component={Locations} />
