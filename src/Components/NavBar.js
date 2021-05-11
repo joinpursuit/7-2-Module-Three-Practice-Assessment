@@ -1,6 +1,7 @@
 import React from "react"
 import "./navBar.css"
 import piplup from "./piplup.jpg"
+import pokeball2 from "./pokeball2.png"
 import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
@@ -9,7 +10,7 @@ const NavBar = () => {
     return (
         <nav className="nav-bar"> 
         <a href="/">
-        <img src={piplup} alt="piplup"/>
+        <img src={pokeball2} alt="piplup"/>
         </a>
        
         <NavLink exact to="/"></NavLink>
