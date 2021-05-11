@@ -2,3 +2,32 @@ img {
     height: 200px;
     width: 200px;
 }
+
+div ul {
+    list-style-type: square;
+    text-align: center;
+}
+
+div ul li {
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+.abilities {
+    /* text-align: center; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+.abilities-ul li {
+ text-align: center;
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ margin-right: 40px;
+}
