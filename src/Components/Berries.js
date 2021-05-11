@@ -27,7 +27,7 @@ const Berries = () => {
     try {
       const res = await axios.get(`https://pokeapi.co/api/v2/berry/${berry}`);
       setFirmness(res.data.firmness.name);
-      console.log(res);
+      
     } catch (error) {
       console.log(error);
     }
