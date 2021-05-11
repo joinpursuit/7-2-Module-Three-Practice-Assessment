@@ -1,0 +1,15 @@
+nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+nav .active {
+    font-size: bold;
+    color: rebeccapurple;
+    background-color: rosybrown;
+}
+
+.homeIcon {
+    max-height: 50px;
+    max-width: 50px;
+}
