@@ -5,7 +5,7 @@ import axios from "axios";
 export default function Berries() {
     const [berries, setBerries] = useState([])
     const [berry, setBerry] = useState("")
-    const [specs, setSpecs] = useState("")
+    const [berryFirmness, setBerryFirmness] = useState("")
 
     useEffect(() => {
         generateBerries()
@@ -36,10 +36,10 @@ export default function Berries() {
         // console.log(url)
         try {
             const res = await axios.get(url)
-            setSpecs((prevInput) => res.data)
+            setBerryFirmness((prevInput) => res.data)
             // console.log(res.data.firmness.name)
         } catch (err) {
-            setSpecs((prevInput) => "")
+            setBerryFirmness((prevInput) => "")
         }
     }
 
@@ -50,8 +50,8 @@ export default function Berries() {
         )
     })
     let firmnessDisplay = ""
-    if (specs) {
-        firmnessDisplay = specs.firmness.name
+    if (berryFirmness) {
+        firmnessDisplay = berryFirmness.firmness.name
     }
     return (
         <div>
@@ -62,7 +62,6 @@ export default function Berries() {
             </select>
             <h2>{berry}</h2>
             {firmnessDisplay}
-            {/* <h3>{firmnessDisplay}</h3> */}
         </div>
     )
 }

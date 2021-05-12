@@ -3,8 +3,8 @@ import axios from "axios";
 
 export default function Pokemon() {
     const [input, setInput] = useState("")
-    const [toggle, setToggle] = useState(true)
-    const [pokemon, setPokemon] = useState()
+    const [correctInput, setCorrectInput] = useState(true)
+    const [pokemon, setPokemon] = useState({})
     const handleChange = (e) => {
         setInput((prevInput) => e.target.value)
     }
@@ -17,13 +17,14 @@ export default function Pokemon() {
             )
             setPokemon((prev) => res.data)
             setInput((prev) => "")
-            setToggle((prev) => true)
+            setCorrectInput((prev) => true)
+            debugger
         } catch (err) {
-            setToggle((prev) => false)
+            setCorrectInput((prev) => false)
             setInput((prev) => "")
         }
     }
-    if (toggle === false){
+    if (correctInput === false) {
         return (
             <div>
                 <h1>Search for a Pokemon</h1>
@@ -34,7 +35,7 @@ export default function Pokemon() {
                 <h3>Pokemon not found! Try another name or ID number</h3>
             </div>
         )
-    } else if (toggle === true && pokemon){
+    } else if ((correctInput === true) && (Object.keys(pokemon).length !== 0)) {
         return (
             <div>
                 <h1>Search for a Pokemon</h1>
@@ -43,11 +44,11 @@ export default function Pokemon() {
                     <button>Submit</button>
                 </form>
                 <h3>Name: {pokemon.name}</h3>
-                <img src={pokemon.sprites.front_default} alt={pokemon.name}/>
+                <img src={pokemon.sprites.front_default} alt={pokemon.name} />
                 <h3>ID {pokemon.id}</h3>
             </div>
         )
-    } else  {
+    } else {
         return (
             <div>
                 <h1>Search for a Pokemon</h1>
@@ -57,5 +58,5 @@ export default function Pokemon() {
                 </form>
             </div>
         )
-    }  
+    }
 }
