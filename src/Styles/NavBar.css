@@ -1,0 +1,26 @@
+header{
+    background-color: #F2CC8F;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+    text-decoration: none;
+    box-shadow: 0 -15px 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+header img {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+header a {
+    text-decoration: none;
+    font-size: 20px;
+    
+    color: #d38b6c;
+}
+
+header .active {
+    font-weight: bold;
+}
