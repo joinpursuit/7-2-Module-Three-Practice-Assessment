@@ -43,7 +43,7 @@ getPokemon = async () => {
   render() {
       const { pokes } = this.state;
     return (
-      <section>
+      <section className="section">
         <h1>Search for a Pokemon</h1>
         <form onSubmit={this.handleSubmit}>
           <input onChange={this.handleChange} placeholder="Find Your Pokemon" />
