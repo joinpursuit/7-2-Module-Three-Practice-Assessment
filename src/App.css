@@ -1,3 +1,31 @@
-.app {
-  text-align: center;
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(215, 166, 117);
+  height: 100px;
+}
+
+.nav img {
+  height: 50px;
+  width: 50px;
+}
+
+.berries {
+  padding: 10px;
+}
+
+.berries li {
+  list-style: none;
+}
+
+.pokemon {
+  padding: 10px;
+}
+
+.locations {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
