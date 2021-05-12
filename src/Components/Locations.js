@@ -1,47 +1,44 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-class Locations extends Component {
-  state = { locations: [], showLocations: false };
+const Locations = () => {
+  const [locations, setLocations] = useState([]);
+  const [showLocations, setShowLocations] = useState(false);
 
-  componentDidMount() {
-    this.fetchLocations();
-  }
+  useEffect(() => {
+    fetchLocations();
+  }, []);
 
-  fetchLocations = async () => {
+  const fetchLocations = async () => {
     try {
       const res = await axios.get("https://pokeapi.co/api/v2/location");
-      this.setState({ locations: res.data.results });
+      setLocations(res.data.results);
     } catch (err) {
-      this.setState({ locations: [] });
+      setLocations([]);
     }
   };
 
-  handleClick = (e) => {
-    this.setState((prevState) => {
-      return { showLocations: !prevState.showLocations };
-    });
-  };
+  const handleClick = () =>
+    setShowLocations((prevShowLocations) => !prevShowLocations);
 
-  render() {
-    const { locations, showLocations } = this.state;
-    return (
-      <section>
-        <h1>List of Locations</h1>
+  return (
+    <section>
+      <h1>List of Locations</h1>
 
-        <button onClick={this.handleClick}>
-          {showLocations ? "Hide Locations" : "Show Locations"}
-        </button>
-        {showLocations ? (
-          <ul>
-            {locations.map((locationObj) => {
-              return <li key={locationObj.name}>{locationObj.name}</li>;
-            })}
-          </ul>
-        ): <ul></ul>}
-      </section>
-    );
-  }
-}
+      <button onClick={handleClick}>
+        {showLocations ? "Hide Locations" : "Show Locations"}
+      </button>
+      {showLocations ? (
+        <ul>
+          {locations.map((locationObj) => {
+            return <li key={locationObj.name}>{locationObj.name}</li>;
+          })}
+        </ul>
+      ) : (
+        <ul></ul>
+      )}
+    </section>
+  );
+};
 
 export default Locations;

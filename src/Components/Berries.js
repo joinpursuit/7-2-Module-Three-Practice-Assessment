@@ -1,52 +1,51 @@
 import axios from "axios";
-import { Component } from "react";
+import { useState, useEffect } from "react";
 
-class Berries extends Component {
-  state = { berries: [], selectedBerryUrl: "", selectedBerry: {} };
+const Berries = () => {
+  const [berries, setBerries] = useState([]);
+  const [selectedBerryUrl, setSelectedBerryUrl] = useState("");
+  const [selectedBerry, setSelectedBerry] = useState({});
 
-  fetchAllBerries = async () => {
+  const fetchAllBerries = async () => {
     try {
       const res = await axios.get("https://pokeapi.co/api/v2/berry/");
-      this.setState({ berries: res.data.results });
+      setBerries(res.data.results);
     } catch (error) {
-      this.setState({ berries: [] });
+      setBerries([]);
     }
   };
 
-  componentDidMount() {
-    this.fetchAllBerries();
-  }
+  useEffect(() => {
+    fetchAllBerries();
+  }, []);
 
-  selectBerry = async (e) => {
-    this.setState({ selectedBerryUrl: e.target.value });
+  const selectBerry = async (e) => {
+    setSelectedBerryUrl(e.target.value);
     try {
       const res = await axios.get(e.target.value);
-      this.setState({ selectedBerry: res.data });
+      setSelectedBerry(res.data);
     } catch (error) {
-      this.setState({ selectedBerry: {} });
+      setSelectedBerry({});
     }
   };
 
-  render() {
-    const { berries, selectedBerryUrl, selectedBerry } = this.state;
-    return (
-      <section>
-        <h1>Select a Type</h1>
-        <select value={selectedBerryUrl} onChange={this.selectBerry}>
-          <option value="" selected ></option>
-          {berries.map((berryObj) => {
-            return (
-              <option key={berryObj.name} value={berryObj.url}>
-                {berryObj.name}
-              </option>
-            );
-          })}
-        </select>
-        <h1>{selectedBerry.name}</h1>
-        <p>{selectedBerry.firmness && selectedBerry.firmness.name}</p>
-      </section>
-    );
-  }
-}
+  return (
+    <section>
+      <h1>Select a Type</h1>
+      <select value={selectedBerryUrl} onChange={selectBerry}>
+        <option value="" selected></option>
+        {berries.map((berryObj) => {
+          return (
+            <option key={berryObj.name} value={berryObj.url}>
+              {berryObj.name}
+            </option>
+          );
+        })}
+      </select>
+      <h1>{selectedBerry.name}</h1>
+      <p>{selectedBerry.firmness && selectedBerry.firmness.name}</p>
+    </section>
+  );
+};
 
 export default Berries;
