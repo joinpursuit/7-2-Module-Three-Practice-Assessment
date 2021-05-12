@@ -1,16 +1,14 @@
 import "./App.css";
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 import React, { Component } from "react";
 import Poke from "./images/poke.png";
 import Berries from "./Berries.js";
+import Pokemon from "./Pokemon.js";
+import Locations from "./Locations.js";
 
 export class App extends Component {
-  constructor() {
-    super();
-  }
-
   home = () => {
-    return <h1>Welcome to My Pokemon App</h1>;
+    return <h1>Welcome to My Pokemon App!</h1>;
   };
 
   render() {
@@ -27,6 +25,8 @@ export class App extends Component {
         <div>
           <Switch>
             <Route path="/berries" component={Berries} />
+            <Route path="/pokemon" component={Pokemon} />
+            <Route path="/locations" component={Locations} />
             <Route path="/" render={this.home} />
           </Switch>
         </div>

@@ -36,27 +36,41 @@ export class Berries extends Component {
   };
 
   handleChange = (e) => {
-    this.setState({
-      selectedValue: e.target.value,
-    });
+    if (e.target.value === "") {
+      this.setState({
+        berry: false,
+      });
+    } else {
+      this.setState({
+        selectedValue: e.target.value,
+      });
+    }
   };
 
   render() {
     const { selectedValue, berries, data } = this.state;
-    const options = berries.map((elem) => {
-      return <option value={elem.name}>{elem.name}</option>;
+    const options = berries.map((elem, i) => {
+      return (
+        <option key={i} value={elem.name}>
+          {elem.name}
+        </option>
+      );
     });
     const berry = (berry) => {
       return (
-        <>
-          <li>{berry.name}</li>
-          <li>{berry.firmness}</li>
-        </>
+        <div>
+          <h4>{berry[0].name}</h4>
+          <h4>{berry[0].firmness.name}</h4>
+        </div>
       );
     };
-    console.log(data);
+    const flavors = (flavors) => {
+      return flavors[0].flavors.map((elem, i) => {
+        return <li key={i}>{elem.flavor.name}</li>;
+      });
+    };
     return (
-      <div>
+      <div className="berries">
         <h1>Select a Type</h1>
         <select
           onChange={this.handleChange}
@@ -64,9 +78,13 @@ export class Berries extends Component {
           name=""
           id=""
         >
+          <option value=""> </option>
           {options}
         </select>
-        <ul>{this.state.berry ? berry(data) : ""}</ul>
+        {this.state.berry ? berry(data) : ""}
+        <div>
+          <ul>{this.state.berry ? flavors(data) : ""}</ul>
+        </div>
       </div>
     );
   }
