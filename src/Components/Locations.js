@@ -12,7 +12,6 @@ export default function Locations() {
                 `https://pokeapi.co/api/v2/location`
             )
             setList((prev) => res.data.results)
-            console.log(res.data.results)
         } catch (err) {
             setList((prev) => "")
         }

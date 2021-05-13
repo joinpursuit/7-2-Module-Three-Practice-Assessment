@@ -9,13 +9,13 @@ function App() {
   return (
 
     <div className="app">
-      <NavBar/>
+      <NavBar />
       <Switch>
-          <Route path={"/pokemon"} component={Pokemon} />
-          <Route path={"/locations"} component={Locations} />
-          <Route path={"/berries"} component={Berries} />
-          <Route path={"/"} component={Welcome} />
-        </Switch>
+        <Route path={"/pokemon"} component={Pokemon} />
+        <Route path={"/locations"} component={Locations} />
+        <Route path={"/berries"} component={Berries} />
+        <Route path={"/"} component={Welcome} />
+      </Switch>
     </div>
   );
 }

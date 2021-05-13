@@ -8,7 +8,6 @@ export default function Pokemon() {
     const handleChange = (e) => {
         setInput((prevInput) => e.target.value)
     }
-
     const fetchPokemon = async (e) => {
         e.preventDefault()
         try {
@@ -18,7 +17,6 @@ export default function Pokemon() {
             setPokemon((prev) => res.data)
             setInput((prev) => "")
             setCorrectInput((prev) => true)
-            debugger
         } catch (err) {
             setCorrectInput((prev) => false)
             setInput((prev) => "")

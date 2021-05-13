@@ -1,68 +1,45 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
 
-
 export default function Berries() {
     const [berries, setBerries] = useState([])
-    const [berry, setBerry] = useState("")
-    const [berryFirmness, setBerryFirmness] = useState("")
+    const [selectedBerryUrl, setSelectedBerryUrl] = useState("")
+    const [selectedBerry, setSelectedBerry] = useState({})
 
     useEffect(() => {
-        generateBerries()
+        fetchAllBerries()
     }, [])
-    const generateBerries = async () => {
+    const fetchAllBerries = async () => {
         try {
-            const res = await axios.get(
-                `https://pokeapi.co/api/v2/berry/`
-            )
-            setBerries((prevInput) => res.data.results)
+            const res = await axios.get(`https://pokeapi.co/api/v2/berry/`)
+            setBerries(res.data.results)
         } catch (err) {
-            setBerries((prevInput) => "")
+            setBerries([])
         }
     }
-    const upDateBerry = (e) => {
+    const fetchBerryFirmness = async (e) => {
         e.preventDefault()
-        setBerry((prevInput) => e.target.value)
-        let url = ""
-        berries.forEach(berry => {
-            if (e.target.value === berry.name) {
-                url = berry.url
-            }
-        })
-        fetchBerry(url)
-
-    }
-    const fetchBerry = async (url) => {
-        // console.log(url)
+        setSelectedBerryUrl(e.target.value)
         try {
-            const res = await axios.get(url)
-            setBerryFirmness((prevInput) => res.data)
-            // console.log(res.data.firmness.name)
+            const res = await axios.get(e.target.value)
+            setSelectedBerry(res.data)
         } catch (err) {
-            setBerryFirmness((prevInput) => "")
+            setSelectedBerry({})
         }
-    }
-
-    const berryList = berries.map((el, i) => {
-
-        return (
-            <option value={el.name} key={i}>{el.name}</option>
-        )
-    })
-    let firmnessDisplay = ""
-    if (berryFirmness) {
-        firmnessDisplay = berryFirmness.firmness.name
     }
     return (
         <div>
             <h1>Select a Type</h1>
-            <select defaultValue={berry} onChange={upDateBerry}>
-                <option value="" selected ></option>
-                {berryList}
+            <select value={selectedBerryUrl} onChange={fetchBerryFirmness}>
+                <option defaultValue=""></option>
+                {berries.map(singleBerry => {
+                    return (
+                        <option value={singleBerry.url} key={singleBerry.name}>{singleBerry.name}</option>
+                    )
+                })}
             </select>
-            <h2>{berry}</h2>
-            {firmnessDisplay}
+            <h2>{selectedBerry.name}</h2>
+            <h4>{selectedBerry.firmness && selectedBerry.firmness.name}</h4>
         </div>
     )
 }
-// https://pokeapi.co/api/v2/berry/
