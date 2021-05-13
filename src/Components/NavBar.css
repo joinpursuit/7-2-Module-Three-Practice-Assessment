@@ -1,0 +1,16 @@
+.NavBarContainer {
+  display: flex;
+  justify-content: space-around;
+  /* align-items: center; */
+  background-color: lightgoldenrodyellow;
+}
+
+.NavBarContainer a {
+   color: salmon;
+   font-size: 30px;
+}
+
+.NavBarContainer img {
+    height: 50px;
+    width: 50px;
+}
