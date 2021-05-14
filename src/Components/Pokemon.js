@@ -4,17 +4,21 @@ import React from "react";
 class Pokemon extends React.Component {
   state = { input: "", pokemon: {}, searched: false };
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    this.setState({ searched: true });
+
+  fetchPokemon = async (pokemon) => {
     try {
-      const { input } = this.state;
-      const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${input}`);
+      const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
       this.setState({ pokemon: res.data });
-      //   debugger
     } catch (error) {
       this.setState({ pokemon: {} });
     }
+  }
+  
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { input } = this.state;
+    this.setState({ searched: true });
+    this.fetchPokemon(input)
     this.setState({ input: "" });
   };
 
