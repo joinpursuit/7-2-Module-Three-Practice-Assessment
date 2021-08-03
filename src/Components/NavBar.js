@@ -1,13 +1,12 @@
 import { NavLink } from "react-router-dom";
-import "../Styles/NavBar.css"
 import pic from "../assets/pokeball4.png"
+import "../Styles/NavBar.css"
 
 const NavBar = () => {
   return (
     <nav id="NavBar">
       <NavLink exact to="/">
-        {/* try finding pokeball on the pokemon api site */}
-        {/* link a photo in the assets directory */}
+        {/* can't go pass src/ directory  */}
         <img id="pic" src={pic} alt="shouldBeAPokeBall"/>
       </NavLink>
       <NavLink to="/pokemon">Pokemon</NavLink>

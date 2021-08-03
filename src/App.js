@@ -1,10 +1,10 @@
 import { Route, Switch } from "react-router-dom";
+import Home from "./Components/Home";
 import NavBar from "./Components/NavBar";
 import Berries from "./Components/Berries";
 import Pokemon from "./Components/Pokemon";
 import Locations from "./Components/Locations";
 import "./App.css";
-import Home from "./Components/Home";
 
 function App() {
   return (

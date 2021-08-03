@@ -1,38 +1,44 @@
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Component } from "react";
 
-class Locations extends Component {
-  state = { locations: [], show: "Show Locations" };
+const Locations = () => {
+  const [locations, setLocations] = useState([]);
+  const [show, setShow] = useState("Show Locations");
+  const didMount = useRef(false);
 
-// find a better way to code this
-  loadLocations = async () => {
-      const { show } = this.state;
-     if (show === "Show Locations") {
+  // find a better way to write this
+  const loadLocations = async () => {
+    if (show === "Show Locations") {
       try {
         const res = await axios.get("https://pokeapi.co/api/v2/location");
-        this.setState({ locations: res.data.results, show: "Hide Locations" });
-      } catch (err) {
-        this.setState({ locations: [] });
+        setLocations(res.data.results);
+        setShow("Hide Locations");
+        // debugger
+      } catch (error) {
+        console.log(error);
+        setLocations([]);
+        setShow("Show Locations");
       }
     } else {
-      this.setState({ locations: [], show: "Show Locations" });
+      setLocations([]);
+      setShow("Show Locations");
     }
   };
 
-  render() {
-    const { locations, show } = this.state;
-    return (
-      <section className="section">
-        <h1>List of Locations</h1>
-        <ul>
-          {locations.map((location) => {
-            return <li key={location.name}>{location.name}</li>;
-          })}
-        </ul>
-        <button onClick={this.loadLocations}>{show}</button>
-      </section>
-    );
-  }
-}
+  // how to prevent the missing dependency warning
+  useEffect(() => { didMount.current ? loadLocations() : didMount.current = true }, []);
+
+  return (
+    <section className="section">
+      <h1>List of Locations</h1>
+      <ul>
+        {locations.map((location) => {
+          return <li key={location.name}>{location.name}</li>;
+        })}
+      </ul>
+      <button onClick={loadLocations}>{show}</button>
+    </section>
+  );
+};
 
 export default Locations;
